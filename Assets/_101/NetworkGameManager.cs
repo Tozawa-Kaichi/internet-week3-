@@ -11,7 +11,10 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
     /// <summary>プレイヤーのプレハブ</summary>
     [SerializeField] string m_playerPrefabName = "Prefab";
     [SerializeField] Transform[] m_spawnPositions;
+    [SerializeField] Transform m_unlimitedSpawnPoints;
+    
 
+    
     private void Awake()
     {
         // シーンの自動同期は無効にする（シーン切り替えがない時は意味はない）
@@ -20,6 +23,8 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
 
     private void Start()
     {
+        Random _random = new Random();
+        
         // Photon に接続する
         Connect("1.0"); // 1.0 はバージョン番号（同じバージョンを指定したクライアント同士が接続できる）
     }
@@ -85,7 +90,8 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
              * MaxPlayers の型は byte なのでキャストしている。
              * MaxPlayers の型が byte である理由はおそらく1ルームのプレイ人数を255人に制限したいためでしょう。
              * **************************************************/
-            roomOptions.MaxPlayers = (byte) m_spawnPositions.Length;//255以上入れられない筈なのにLengthで255以上入れられちゃうのでキャストしている
+            //roomOptions.MaxPlayers = (byte) m_spawnPositions.Length;//255以上入れられない筈なのにLengthで255以上入れられちゃうのでキャストしている
+            roomOptions.MaxPlayers = 255;
             PhotonNetwork.CreateRoom(null, roomOptions); // ルーム名に null を指定するとランダムなルーム名を付ける
         }
     }
@@ -95,11 +101,15 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
     /// </summary>
     private void SpawnPlayer()
     {
+        
         // プレイヤーをどこに spawn させるか決める
         int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;    // 自分の ActorNumber を取得する。なお ActorNumber は「1から」入室順に振られる。
         Debug.Log("My ActorNumber: " + actorNumber);
-        Transform spawnPoint = m_spawnPositions[actorNumber - 1];
-
+        //Transform spawnPoint = m_spawnPositions[actorNumber - 1];//ここをちゃんゆに課題で変更suru
+        int r = Random.Range(0, actorNumber - 1);
+        Transform spawnPoint = m_spawnPositions[r];
+        //Transform spawnPoint = m_unlimitedSpawnPoints;
+        
         // プレイヤーを生成し、他のクライアントと同期する
         GameObject player = PhotonNetwork.Instantiate(m_playerPrefabName, spawnPoint.position, Quaternion.identity);
 

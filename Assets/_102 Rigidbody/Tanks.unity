@@ -337,8 +337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerPrefabName: PlayerTankPrefab
-  m_spawnPoint01: {fileID: 147302831}
-  m_spawnPoint02: {fileID: 918620378}
+  m_spawnPositions:
+  - {fileID: 147302831}
+  - {fileID: 918620378}
 --- !u!1 &547401765
 GameObject:
   m_ObjectHideFlags: 0

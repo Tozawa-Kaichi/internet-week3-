@@ -1,6 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// Photon 用の名前空間を参照する
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Rigidbody を使ってプレイヤーを動かすコンポーネント
@@ -24,15 +29,17 @@ public class RigidbodyPlayerController : MonoBehaviour
     [SerializeField] Animator m_anim;
 
     Rigidbody m_rb;
-
+    PhotonView m_view;
 
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
+        m_view = GetComponent<PhotonView>();
     }
 
     void Update()
     {
+        if (!m_view.IsMine) return;
         // 方向の入力を取得し、方向を求める
         float v = Input.GetAxisRaw("Vertical");
         float h = Input.GetAxisRaw("Horizontal");
