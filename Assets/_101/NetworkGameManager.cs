@@ -85,7 +85,7 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
              * MaxPlayers の型は byte なのでキャストしている。
              * MaxPlayers の型が byte である理由はおそらく1ルームのプレイ人数を255人に制限したいためでしょう。
              * **************************************************/
-            roomOptions.MaxPlayers = (byte) m_spawnPositions.Length;
+            roomOptions.MaxPlayers = (byte) m_spawnPositions.Length;//255以上入れられない筈なのにLengthで255以上入れられちゃうのでキャストしている
             PhotonNetwork.CreateRoom(null, roomOptions); // ルーム名に null を指定するとランダムなルーム名を付ける
         }
     }
