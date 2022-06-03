@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_103 ActorNumber/Tanks 2.unity
     guid: c0e29309381d0ac488acd73990a44a47
   - enabled: 1
+    path: Assets/_104 PunRPC/Tanks using RPC.unity
+    guid: eeca783e6ae62f84495a6fb23d426227
+  - enabled: 1
     path: Assets/_NetworkUnityChan/Standalone.unity
     guid: f68e21cb50c27444ea9084cb35ee44fc
   m_configObjects: {}
