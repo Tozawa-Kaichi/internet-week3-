@@ -62,7 +62,7 @@ public class TankController : MonoBehaviourPunCallbacks // Photon Realtime 用�
         {
             m_syncTimer = 0;
             object[] parameters = new object[] { m_life };
-            m_view.RPC("SyncLife", RpcTarget.Others, parameters);
+            m_view.RPC("SyncLife", RpcTarget.Others, parameters);//文字列なので参照検索できない・パラメーターはオブジェクト型配列なので基本何でもいける
         }
 
         float h = Input.GetAxis("Horizontal");
@@ -109,13 +109,13 @@ public class TankController : MonoBehaviourPunCallbacks // Photon Realtime 用�
     /// </summary>
     /// <param name="currentLife"></param>
     [PunRPC]
-    void SyncLife(int currentLife)
+    void SyncLife(int currentLife)//rpcでよばれるのはここ 戻り値無しなのでvoid
     {
         m_life = currentLife;
         RefreshLifeText();
         Debug.LogFormat("Player {0} の {1} の残りライフは {2}", m_view.Owner.ActorNumber, gameObject.name, m_life);
     }
-
+    
     /// <summary>
     /// ライフ表示を更新する
     /// </summary>
