@@ -21,6 +21,7 @@ public class RaiseEvent : MonoBehaviour
     /// </summary>
     public void Raise()
     {
+        
         //イベントとして送るものを作る
         byte eventCode = 0; // イベントコード 0~199 まで指定できる。200 以上はシステムで使われているので使えない。
         //ネットを行き来するデータ量を減らしたいのでバイト

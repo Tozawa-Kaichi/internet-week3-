@@ -21,7 +21,7 @@ public class ReceiveEventB : MonoBehaviour
         PhotonNetwork.NetworkingClient.EventReceived += EventReceived;
     }
 
-    /// <summary>オブジェクトが無効になった時にイベントからメソッドを解除する</summary>
+    /// <summary>nullリファ来るのでオブジェクトが無効になった時にイベントからメソッドを解除する</summary>
     private void OnDisable()
     {
         PhotonNetwork.NetworkingClient.EventReceived -= EventReceived;
